@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { nextLyric } from './../actions';
 
 const SongDisplay = ({ dispatch, song }) => {
   const { title, artist, songArray, arrayPosition, id } = song;
@@ -10,15 +11,11 @@ const SongDisplay = ({ dispatch, song }) => {
     <div>
       <h1>{title}</h1>
       <h4>{artist}</h4>
-      <hr/>
+      <hr />
       <div onClick={e => {
         e.preventDefault();
-        if(!(arrayPosition === songArray.length - 1)) {
-          action = {
-            type: 'NEXT_LYRIC',
-            currentSongId: id
-          };
-          dispatch(action);
+        if (!(arrayPosition === songArray.length - 1)) {
+          dispatch(nextLyric(id));
         } else {
           action = {
             type: 'RESTART_SONG',

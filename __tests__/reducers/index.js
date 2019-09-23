@@ -3,6 +3,7 @@ import songChangeReducer from './../../src/reducers/songChangeReducer';
 import lyricChangeReducer from './../../src/reducers/lyricChangeReducer';
 import rootReducer from './../../src/reducers/';
 import { createStore } from 'redux';
+import * as actions from './../../src/actions';
 
 describe('Karaoke App', () => {
   const { initialState, types } = constants;
@@ -15,6 +16,10 @@ describe('Karaoke App', () => {
 
     it('Should update currently-displayed lyric of song', () => {
       expect(lyricChangeReducer(initialState.songsById, { type: 'NEXT_LYRIC', currentSongId: 2 })[2].arrayPosition).toEqual(initialState.songsById[2].arrayPosition + 1);
+    });
+
+    it('Should update currently-displayed lyric of song using the action creator', () => {
+      expect(lyricChangeReducer(initialState.songsById, actions.nextLyric(2))[2].arrayPosition).toEqual(initialState.songsById[2].arrayPosition + 1);
     });
 
     it('Should restart song', () => {
